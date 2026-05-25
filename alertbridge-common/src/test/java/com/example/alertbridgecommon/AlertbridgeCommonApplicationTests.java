@@ -1,13 +1,12 @@
-package com.example.alertbridgecommon;
+package com.alertbridge.common;
 
 import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
 
-@SpringBootTest
-class AlertbridgeCommonApplicationTests {
+class AlertbridgeCommonTests {
 
     @Test
-    void contextLoads() {
+    void libraryClassLoads() {
+        new AlertbridgeCommon();
     }
 
 }

@@ -33,6 +33,12 @@
             <groupId>com.alertbridge</groupId>
             <artifactId>alertbridge-common</artifactId>
         </dependency>
+        <!-- H2 in-memory database – test datasource (replace with production driver at runtime) -->
+        <dependency>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
 
     <build>

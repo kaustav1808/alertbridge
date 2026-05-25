@@ -18,20 +18,13 @@
     <description>AlertBridge Common Library</description>
 
     <dependencies>
-        <!-- Web MVC -->
+        <!-- Web MVC (optional – services that need it declare it themselves) -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
+            <optional>true</optional>
         </dependency>
     </dependencies>
 
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-            </plugin>
-        </plugins>
-    </build>
 
 </project>
