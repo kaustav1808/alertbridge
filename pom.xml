@@ -38,14 +38,6 @@
         <jacoco.version>0.8.12</jacoco.version>
         <checkstyle.version>3.3.1</checkstyle.version>
         <spotbugs.version>4.8.3.1</spotbugs.version>
-        <!--
-            Coverage gate is set to 0% at the parent level so skeleton/scaffold
-            modules do not fail the build.  Override this property in each module
-            once production code and real tests are in place:
-              <properties>
-                <coverage.minimum>0.80</coverage.minimum>
-              </properties>
-        -->
         <coverage.minimum>0.00</coverage.minimum>
     </properties>
 
@@ -141,7 +133,9 @@
         </pluginManagement>
 
         <plugins>
-            <!-- JaCoCo: 80% coverage gate -->
+            <!-- JaCoCo: coverage gate (threshold driven by ${coverage.minimum};
+                 defaults to 0% in the parent so scaffold modules don't fail —
+                 individual modules override the property once they have real code) -->
             <plugin>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>

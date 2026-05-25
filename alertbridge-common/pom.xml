@@ -21,10 +21,10 @@
         <coverage.minimum>0.80</coverage.minimum>
     </properties>
     <description>
-        AlertBridge Common Library – plain Java library (NOT a Spring Boot application).
+        AlertBridge Common Library – plain Java/Spring library (NOT a Spring Boot application).
         Provides shared DTOs, enums, exceptions, and a reusable Spring MVC exception handler
-        for all AlertBridge microservices. Compiled against bare Spring Framework and
-        Jakarta APIs; does not pull in embedded servers or Boot auto-configuration.
+        for all AlertBridge microservices. Uses spring-boot-autoconfigure to register
+        GlobalExceptionHandler automatically; does not pull in embedded servers or starters.
     </description>
 
     <!--
@@ -32,10 +32,11 @@
         │  THIS MODULE IS A PLAIN JAR LIBRARY — NOT A SPRING BOOT APP    │
         │                                                                 │
         │  • No spring-boot-maven-plugin (no fat/executable jar)         │
-        │  • No spring-boot-starter-* (no embedded Tomcat, no            │
-        │    auto-configuration, no Boot context)                        │
-        │  • All versions are managed by the parent Spring Boot BOM      │
-        │    so consumers always get a consistent dependency set         │
+        │  • No spring-boot-starter-* (no embedded Tomcat, no Boot ctx)  │
+        │  • spring-boot-autoconfigure is optional — provides only the   │
+        │    @AutoConfiguration / @ConditionalOn* annotations so that    │
+        │    GlobalExceptionHandler is auto-registered in consumers      │
+        │  • All versions managed by the parent Spring Boot BOM          │
         └─────────────────────────────────────────────────────────────────┘
     -->
     <dependencies>
@@ -43,8 +44,6 @@
         <!--
             Spring WebMVC – provides @RestControllerAdvice, @ExceptionHandler,
             ResponseEntity, HttpStatus, MethodArgumentNotValidException etc.
-            This is a Spring Framework dependency, NOT a Spring Boot starter —
-            it carries no embedded server or Boot auto-configuration.
         -->
         <dependency>
             <groupId>org.springframework</groupId>
@@ -52,10 +51,20 @@
         </dependency>
 
         <!--
+            Spring Boot AutoConfigure – optional; provides @AutoConfiguration and
+            @ConditionalOn* so GlobalExceptionHandler is auto-registered in any
+            consuming Spring Boot service without manual component-scan config.
+            Marked optional so it is NOT pulled transitively into consumers' classpaths.
+        -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-autoconfigure</artifactId>
+            <optional>true</optional>
+        </dependency>
+
+        <!--
             Jakarta Servlet API – supplies HttpServletRequest used by
-            GlobalExceptionHandler.  Provided because the actual
-            implementation is supplied by the container (or embedded
-            server) at runtime in each service.
+            GlobalExceptionHandler.  Provided by the container at runtime.
         -->
         <dependency>
             <groupId>jakarta.servlet</groupId>
@@ -64,10 +73,8 @@
         </dependency>
 
         <!--
-            Jakarta Validation API – only the annotation contract
-            (@NotBlank, @NotNull, @Size …) used on NotificationRequest.
-            No Hibernate Validator implementation is pulled in here;
-            the consuming service brings its own validation runtime.
+            Jakarta Validation API – annotation contract (@NotBlank, @NotNull, @Size …).
+            No Hibernate Validator implementation pulled in here.
         -->
         <dependency>
             <groupId>jakarta.validation</groupId>
@@ -75,10 +82,7 @@
         </dependency>
 
         <!--
-            Jackson Annotations – @JsonInclude on ApiResponse and
-            ErrorResponse.  Only the annotations jar is needed for
-            compilation; the full runtime (jackson-databind) is
-            provided by whichever service uses this library.
+            Jackson Annotations – @JsonInclude on ApiResponse / ErrorResponse.
         -->
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>

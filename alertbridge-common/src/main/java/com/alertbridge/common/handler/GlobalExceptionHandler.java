@@ -20,8 +20,14 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 /**
  * Central exception handler shared by all AlertBridge REST services.
  *
- * <p>Include this module as a dependency and Spring Boot component-scan will
- * pick up this advice automatically via {@code @RestControllerAdvice}.
+ * <p>This handler is registered automatically via Spring Boot auto-configuration
+ * ({@code AlertBridgeAutoConfiguration}) when {@code alertbridge-common} is on the
+ * classpath of a servlet web application — no manual {@code @Import} or
+ * {@code scanBasePackages} configuration is needed in the consuming service.
+ *
+ * <p>If a consuming service needs to customise exception handling it can declare its
+ * own {@code GlobalExceptionHandler} bean; the {@code @ConditionalOnMissingBean}
+ * guard in the auto-configuration will then skip this default registration.
  */
 @RestControllerAdvice
 public class GlobalExceptionHandler {
