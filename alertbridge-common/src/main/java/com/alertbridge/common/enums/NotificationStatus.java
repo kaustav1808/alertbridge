@@ -5,22 +5,21 @@ package com.alertbridge.common.enums;
  */
 public enum NotificationStatus {
 
-    /** Notification has been received and queued for delivery. */
-    PENDING,
+  /** Notification has been received and queued for delivery. */
+  PENDING,
 
-    /** Notification is currently being processed. */
-    PROCESSING,
+  /** Notification is currently being processed. */
+  PROCESSING,
 
-    /** Notification was delivered successfully. */
-    SENT,
+  /** Notification was delivered successfully. */
+  SENT,
 
-    /** Delivery failed but will be retried. */
-    RETRYING,
+  /** Delivery failed but will be retried. */
+  RETRYING,
 
-    /** Delivery failed permanently after exhausting all retry attempts. */
-    FAILED,
+  /** Delivery failed permanently after exhausting all retry attempts. */
+  FAILED,
 
-    /** Notification was cancelled before delivery. */
-    CANCELLED
+  /** Notification was cancelled before delivery. */
+  CANCELLED
 }
-

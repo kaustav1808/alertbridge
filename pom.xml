@@ -154,10 +154,6 @@
                             <goal>check</goal>
                         </goals>
                         <configuration>
-                            <excludes>
-                                <!-- Exclude Spring Boot bootstrap classes from coverage checks -->
-                                <exclude>**/*Application.class</exclude>
-                            </excludes>
                             <rules>
                                 <rule>
                                     <element>BUNDLE</element>

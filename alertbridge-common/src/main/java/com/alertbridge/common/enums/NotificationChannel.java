@@ -5,13 +5,12 @@ package com.alertbridge.common.enums;
  */
 public enum NotificationChannel {
 
-    /** Email delivery via SMTP / alertbridge-email-service. */
-    EMAIL,
+  /** Email delivery via SMTP / alertbridge-email-service. */
+  EMAIL,
 
-    /** SMS delivery via Twilio / alertbridge-sms-service. */
-    SMS,
+  /** SMS delivery via Twilio / alertbridge-sms-service. */
+  SMS,
 
-    /** Mobile push notification via FCM / alertbridge-push-service. */
-    PUSH
+  /** Mobile push notification via FCM / alertbridge-push-service. */
+  PUSH
 }
-

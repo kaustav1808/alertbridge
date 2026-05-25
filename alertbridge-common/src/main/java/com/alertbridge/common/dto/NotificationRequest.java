@@ -10,7 +10,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-
 /**
  * Request payload for dispatching a notification through any AlertBridge channel.
  * Used by the notification-service, scheduler-service, and analytics-service.
