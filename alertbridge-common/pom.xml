@@ -51,15 +51,13 @@
         </dependency>
 
         <!--
-            Spring Boot AutoConfigure – optional; provides @AutoConfiguration and
+            Spring Boot AutoConfigure – provides @AutoConfiguration and
             @ConditionalOn* so GlobalExceptionHandler is auto-registered in any
             consuming Spring Boot service without manual component-scan config.
-            Marked optional so it is NOT pulled transitively into consumers' classpaths.
         -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-autoconfigure</artifactId>
-            <optional>true</optional>
         </dependency>
 
         <!--
