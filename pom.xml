@@ -86,13 +86,21 @@
     <build>
         <pluginManagement>
             <plugins>
-                <!-- Java 21 compiler -->
+                <!-- Java 21 compiler — Lombok must be in annotationProcessorPaths
+                     so the annotation processor runs before javac validates symbols. -->
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-compiler-plugin</artifactId>
                     <version>3.13.0</version>
                     <configuration>
                         <release>21</release>
+                        <annotationProcessorPaths>
+                            <path>
+                                <groupId>org.projectlombok</groupId>
+                                <artifactId>lombok</artifactId>
+                                <version>${lombok.version}</version>
+                            </path>
+                        </annotationProcessorPaths>
                     </configuration>
                 </plugin>
 
