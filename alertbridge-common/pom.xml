@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+                             https://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>com.alertbridge</groupId>
+        <artifactId>alertbridge-parent</artifactId>
+        <version>1.0.0-SNAPSHOT</version>
+        <relativePath>../pom.xml</relativePath>
+    </parent>
+
+    <artifactId>alertbridge-common</artifactId>
+    <name>alertbridge-common</name>
+
+    <!-- Override parent's 0% gate — common has real production code -->
+    <properties>
+        <coverage.minimum>0.80</coverage.minimum>
+    </properties>
+    <description>
+        AlertBridge Common Library – plain Java/Spring library (NOT a Spring Boot application).
+        Provides shared DTOs, enums, exceptions, and a reusable Spring MVC exception handler
+        for all AlertBridge microservices. Uses spring-boot-autoconfigure to register
+        GlobalExceptionHandler automatically; does not pull in embedded servers or starters.
+    </description>
+
+    <!--
+        ┌─────────────────────────────────────────────────────────────────┐
+        │  THIS MODULE IS A PLAIN JAR LIBRARY — NOT A SPRING BOOT APP    │
+        │                                                                 │
+        │  • No spring-boot-maven-plugin (no fat/executable jar)         │
+        │  • No spring-boot-starter-* (no embedded Tomcat, no Boot ctx)  │
+        │  • spring-boot-autoconfigure is optional — provides only the   │
+        │    @AutoConfiguration / @ConditionalOn* annotations so that    │
+        │    GlobalExceptionHandler is auto-registered in consumers      │
+        │  • All versions managed by the parent Spring Boot BOM          │
+        └─────────────────────────────────────────────────────────────────┘
+    -->
+    <dependencies>
+
+        <!--
+            Spring WebMVC – provides @RestControllerAdvice, @ExceptionHandler,
+            ResponseEntity, HttpStatus, MethodArgumentNotValidException etc.
+        -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-webmvc</artifactId>
+        </dependency>
+
+        <!--
+            Spring Boot AutoConfigure – provides @AutoConfiguration and
+            @ConditionalOn* so GlobalExceptionHandler is auto-registered in any
+            consuming Spring Boot service without manual component-scan config.
+        -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-autoconfigure</artifactId>
+        </dependency>
+
+        <!--
+            Jakarta Servlet API – supplies HttpServletRequest used by
+            GlobalExceptionHandler.  Provided by the container at runtime.
+        -->
+        <dependency>
+            <groupId>jakarta.servlet</groupId>
+            <artifactId>jakarta.servlet-api</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
+        <!--
+            Jakarta Validation API – annotation contract (@NotBlank, @NotNull, @Size …).
+            No Hibernate Validator implementation pulled in here.
+        -->
+        <dependency>
+            <groupId>jakarta.validation</groupId>
+            <artifactId>jakarta.validation-api</artifactId>
+        </dependency>
+
+        <!--
+            Jackson Annotations – @JsonInclude on ApiResponse / ErrorResponse.
+        -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-annotations</artifactId>
+        </dependency>
+
+        <!--
+            SLF4J API – logging façade used in GlobalExceptionHandler.
+            Consumers bind their own implementation (Logback, Log4j2 …).
+        -->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+        </dependency>
+
+    </dependencies>
+
+</project>
