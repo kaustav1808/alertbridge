@@ -38,10 +38,6 @@ public class ApiResponse<T> {
     return new ApiResponse<>(AlertBridgeConstants.RESPONSE_SUCCESS, message, data);
   }
 
-  /** Creates a successful response with only a message (no payload). */
-  public static <T> ApiResponse<T> success(String message) {
-    return new ApiResponse<>(AlertBridgeConstants.RESPONSE_SUCCESS, message, null);
-  }
 
   /** Creates an error response with a message. */
   public static <T> ApiResponse<T> error(String message) {
