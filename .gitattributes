@@ -1,0 +1,20 @@
+# Enforce Unix line endings for Maven Wrapper shell scripts
+/mvnw text eol=lf
+
+# Enforce Windows line endings for Windows batch files
+*.cmd text eol=crlf
+
+# Treat all Java, XML, properties, and Markdown as text with auto line-ending normalisation
+*.java text eol=lf
+*.xml text eol=lf
+*.properties text eol=lf
+*.yml text eol=lf
+*.yaml text eol=lf
+*.md text eol=lf
+
+# Treat binary files as binary (no line-ending transformation)
+*.jar binary
+*.class binary
+*.png binary
+*.jpg binary
+

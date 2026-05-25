@@ -15,6 +15,11 @@
 
     <artifactId>alertbridge-common</artifactId>
     <name>alertbridge-common</name>
+
+    <!-- Override parent's 0% gate — common has real production code -->
+    <properties>
+        <coverage.minimum>0.80</coverage.minimum>
+    </properties>
     <description>
         AlertBridge Common Library – plain Java library (NOT a Spring Boot application).
         Provides shared DTOs, enums, exceptions, and a reusable Spring MVC exception handler
